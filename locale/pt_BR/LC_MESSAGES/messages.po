@@ -1,0 +1,210 @@
+# Portuguese (Brazil) translations for telestream-tui.
+# Copyright (C) 2023 THE telestream-tui's COPYRIGHT HOLDER
+# This file is distributed under the same license as the telestream-tui project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: telestream-tui 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-12 12:00-0300\n"
+"PO-Revision-Date: 2023-10-12 12:00-0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Portuguese (Brazil) <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.0\n"
+"Language: pt_BR\n"
+
+msgid "Are you sure you want to quit?"
+msgstr "Você tem certeza que quer sair?"
+
+msgid "✅ Yes"
+msgstr "✅ Sim"
+
+msgid "❌ No"
+msgstr "❌ Não"
+
+msgid "File Browser"
+msgstr "Navegador de Arquivos"
+
+msgid "⬅️ Back"
+msgstr "⬅️ Voltar"
+
+msgid "About/Donate"
+msgstr "Sobre/Doar"
+
+msgid "PIX:"
+msgstr "PIX:"
+
+msgid "\nEnjoying the app? Consider sending a collectible gift on Telegram: https://t.me/jvlianodorneles"
+msgstr "\nAproveitando o app? Considere enviar um presente colecionável no Telegram: https://t.me/jvlianodorneles"
+
+msgid "Back"
+msgstr "Voltar"
+
+msgid "Application Log"
+msgstr "Log do Aplicativo"
+
+msgid "Toggle dark mode"
+msgstr "Alternar modo escuro"
+
+msgid "Quit"
+msgstr "Sair"
+
+msgid "Video Path:"
+msgstr "Caminho do Vídeo:"
+
+msgid "e.g.: /home/user/video.mp4"
+msgstr "ex: /home/user/video.mp4"
+
+msgid "📁 Browse..."
+msgstr "📁 Procurar..."
+
+msgid "Favorite Server:"
+msgstr "Servidor Favorito:"
+
+msgid "Server URL (RTMP/RTMPS):"
+msgstr "URL do Servidor (RTMP/RTMPS):"
+
+msgid "e.g.: rtmps://dc1-1.rtmp.t.me/s/"
+msgstr "ex: rtmps://dc1-1.rtmp.t.me/s/"
+
+msgid "Telegram Stream Key:"
+msgstr "Chave de Transmissão do Telegram:"
+
+msgid "e.g.: 123456:abc-123"
+msgstr "ex: 123456:abc-123"
+
+msgid "👁️ Show"
+msgstr "👁️ Mostrar"
+
+msgid "▶️ Start Stream"
+msgstr "▶️ Iniciar Transmissão"
+
+msgid "⏹️ Stop Stream"
+msgstr "⏹️ Parar Transmissão"
+
+msgid "📜 Show Log"
+msgstr "📜 Mostrar Log"
+
+msgid "ℹ️ About/Donate"
+msgstr "ℹ️ Sobre/Doar"
+
+msgid "⭐ Manage Favorites"
+msgstr "⭐ Gerenciar Favoritos"
+
+msgid "🙈 Hide"
+msgstr "🙈 Ocultar"
+
+msgid "[ERROR] Video path, server URL, and stream key are required."
+msgstr "[ERRO] Caminho do vídeo, URL do servidor e chave de transmissão são obrigatórios."
+
+msgid "[ERROR] File not found: {video_path}"
+msgstr "[ERRO] Arquivo não encontrado: {video_path}"
+
+msgid "Starting stream..."
+msgstr "Iniciando transmissão..."
+
+msgid "Streaming started with PID: {self.streaming_process.pid}"
+msgstr "Transmissão iniciada com PID: {self.streaming_process.pid}"
+
+msgid "[ERROR] ffmpeg not found. Check if it's installed and in PATH."
+msgstr "[ERRO] ffmpeg não encontrado. Verifique se está instalado e no PATH."
+
+msgid "[ERROR] Failed to start ffmpeg: {e}"
+msgstr "[ERRO] Falha ao iniciar o ffmpeg: {e}"
+
+msgid "Stopping stream..."
+msgstr "Parando transmissão..."
+
+msgid "Stream stopped successfully."
+msgstr "Transmissão parada com sucesso."
+
+msgid "ffmpeg did not respond, forcing termination."
+msgstr "ffmpeg não respondeu, forçando o encerramento."
+
+msgid "Stream forced to stop."
+msgstr "Transmissão forçada a parar."
+
+msgid "No active stream to stop."
+msgstr "Nenhuma transmissão ativa para parar."
+
+msgid "Manage Favorites"
+msgstr "Gerenciar Favoritos"
+
+msgid "Favorite Servers"
+msgstr "Servidores Favoritos"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Key"
+msgstr "Chave"
+
+msgid "Name:"
+msgstr "Nome:"
+
+msgid "Server Name"
+msgstr "Nome do Servidor"
+
+msgid "Server URL:"
+msgstr "URL do Servidor:"
+
+msgid "Stream Key:"
+msgstr "Chave de Transmissão:"
+
+msgid "secret_key"
+msgstr "chave_secreta"
+
+msgid "➕ Add"
+msgstr "➕ Adicionar"
+
+msgid "💾 Save Edit"
+msgstr "💾 Salvar Edição"
+
+msgid "🗑️ Remove"
+msgstr "🗑️ Remover"
+
+msgid "🧹 Clear Fields"
+msgstr "🧹 Limpar Campos"
+
+msgid "Favorite selected in table: {selected_name}"
+msgstr "Favorito selecionado na tabela: {selected_name}"
+
+msgid "Fields populated for {selected_name}"
+msgstr "Campos preenchidos para {selected_name}"
+
+msgid "[ERROR] All fields (Name, URL, Key) are required."
+msgstr "[ERRO] Todos os campos (Nome, URL, Clave) são obrigatórios."
+
+msgid "[ERROR] A favorite with the name '{name}' already exists."
+msgstr "[ERRO] Já existe um favorito com o nome '{name}'."
+
+msgid "Favorite '{name}' added."
+msgstr "Favorito '{name}' adicionado."
+
+msgid "[ERROR] No favorite selected for editing."
+msgstr "[ERRO] Nenhum favorito selecionado para edição."
+
+msgid "[ERROR] Another favorite with the name '{name}' already exists."
+msgstr "[ERRO] Já existe outro favorito com o nome '{name}'."
+
+msgid "Favorite '{self.editing_favorite_original_name}' updated to '{name}'."
+msgstr "Favorito '{self.editing_favorite_original_name}' atualizado para '{name}'."
+
+msgid "[ERROR] Original favorite '{self.editing_favorite_original_name}' not found for editing."
+msgstr "[ERRO] Favorito original '{self.editing_favorite_original_name}' não encontrado para edição."
+
+msgid "[ERROR] No favorite selected for removal."
+msgstr "[ERRO] Nenhum favorito selecionado para remoção."
+
+msgid "Favorite '{self.editing_favorite_original_name}' removed."
+msgstr "Favorito '{self.editing_favorite_original_name}' removido."
+
+msgid "[ERROR] Favorite '{self.editing_favorite_original_name}' not found for removal."
+msgstr "[ERRO] Favorito '{self.editing_favorite_original_name}' não encontrado para remoção."

@@ -5,12 +5,20 @@ import os
 import subprocess
 import threading
 from pathlib import Path
+import gettext
 
 import qrcode
 from textual.app import App, ComposeResult
 from textual.containers import Container, Horizontal, Vertical
 from textual.screen import Screen, ModalScreen
-from textual.widgets import Button, Header, Footer, Input, Label, Static, DirectoryTree, Log, Select, DataTable, Select
+from textual.widgets import Button, Header, Footer, Input, Label, Static, DirectoryTree, Log, Select, DataTable
+
+# Setup gettext for internationalization
+LOCALE_DIR = Path(__file__).parent / "locale"
+gettext.bindtextdomain("messages", LOCALE_DIR)
+gettext.textdomain("messages")
+gettext.install("messages", LOCALE_DIR)
+from gettext import gettext as _
 
 CONFIG_FILE = Path("config.json")
 
@@ -47,10 +55,10 @@ class QuitScreen(ModalScreen):
 
     def compose(self) -> ComposeResult:
         with Vertical(id="quit-dialog"):
-            yield Label("Are you sure you want to quit?", id="quit-question")
+            yield Label(_("Are you sure you want to quit?"), id="quit-question")
             with Horizontal(id="quit-buttons"):
-                yield Button("✅ Yes", variant="error", id="quit-yes")
-                yield Button("❌ No", variant="primary", id="quit-no")
+                yield Button(_("✅ Yes"), variant="error", id="quit-yes")
+                yield Button(_("❌ No"), variant="primary", id="quit-no")
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "quit-yes":
@@ -65,11 +73,11 @@ class FileBrowserScreen(Screen):
     BINDINGS = [("escape", "dismiss", "Back")]
 
     def compose(self) -> ComposeResult:
-        yield Header(name="File Browser")
+        yield Header(name=_("File Browser"))
         # Starts at the system root directory
         yield DirectoryTree(path="/", id="tree_view")
         with Horizontal(classes="button-container"):
-            yield Button("⬅️ Back", id="back_from_file_browser", variant="default")
+            yield Button(_("⬅️ Back"), id="back_from_file_browser", variant="default")
         yield Footer()
 
     def on_directory_tree_file_selected(
@@ -86,17 +94,17 @@ class FileBrowserScreen(Screen):
 class AboutScreen(Screen):
     """Tela de informações do desenvolvedor e doações."""
 
-    BINDINGS = [("escape", "app.pop_screen", "Voltar")]
+    BINDINGS = [("escape", "app.pop_screen", _("Back"))]
 
     def compose(self) -> ComposeResult:
-        yield Header(name="About/Donate")
+        yield Header(name=_("About/Donate"))
         with Vertical(classes="about-container"):
-            yield Static("PIX:", id="pix-label")
+            yield Static(_("PIX:"), id="pix-label")
             with Horizontal(classes="qr-code-container"):
                 yield Static(self.get_pix_qr_code(), id="qr-code")
-            yield Static("\nEnjoying the app? Consider sending a collectible gift on Telegram: https://t.me/jvlianodorneles", id="telegram-gift-label")
+            yield Static(_("\nEnjoying the app? Consider sending a collectible gift on Telegram: https://t.me/jvlianodorneles"), id="telegram-gift-label")
             with Horizontal(classes="button-container"):
-                yield Button("⬅️ Back", id="back", variant="primary")
+                yield Button(_("⬅️ Back"), id="back", variant="primary")
         yield Footer()
 
     def get_pix_qr_code(self) -> str:
@@ -128,30 +136,30 @@ class FavoritesScreen(Screen):
     BINDINGS = [("escape", "app.pop_screen", "Back")]
 
     def compose(self) -> ComposeResult:
-        yield Header(name="Manage Favorites")
+        yield Header(name=_("Manage Favorites"))
         with Container(id="favorites-container"):
-            yield Label("Favorite Servers", classes="screen-title")
+            yield Label(_("Favorite Servers"), classes="screen-title")
             yield DataTable(id="favorites_table", cursor_type="row")
             with Vertical(id="favorite-form"):
-                yield Label("Name:")
-                yield Input(placeholder="Server Name", id="fav_name_input")
-                yield Label("Server URL:")
-                yield Input(placeholder="rtmps://...", id="fav_url_input")
-                yield Label("Stream Key:")
+                yield Label(_("Name:"))
+                yield Input(placeholder=_("Server Name"), id="fav_name_input")
+                yield Label(_("Server URL:"))
+                yield Input(placeholder=_("rtmps://..."), id="fav_url_input")
+                yield Label(_("Stream Key:"))
                 with Horizontal():
-                    yield Input(placeholder="secret_key", id="fav_key_input", password=True)
-                    yield Button("👁️ Show", id="toggle_fav_password", variant="default")
+                    yield Input(placeholder=_("secret_key"), id="fav_key_input", password=True)
+                    yield Button(_("👁️ Show"), id="toggle_fav_password", variant="default")
                 with Horizontal(id="fav-buttons"):
-                    yield Button("➕ Add", id="add_favorite", variant="primary")
-                    yield Button("💾 Save Edit", id="edit_favorite", variant="default", disabled=True)
-                    yield Button("🗑️ Remove", id="remove_favorite", variant="error", disabled=True)
-                    yield Button("🧹 Clear Fields", id="clear_fields", variant="default")
-                    yield Button("⬅️ Back", id="back_from_favorites", variant="default")
+                    yield Button(_("➕ Add"), id="add_favorite", variant="primary")
+                    yield Button(_("💾 Save Edit"), id="edit_favorite", variant="default", disabled=True)
+                    yield Button(_("🗑️ Remove"), id="remove_favorite", variant="error", disabled=True)
+                    yield Button(_("🧹 Clear Fields"), id="clear_fields", variant="default")
+                    yield Button(_("⬅️ Back"), id="back_from_favorites", variant="default")
         yield Footer()
 
     def on_mount(self) -> None:
         table = self.query_one("#favorites_table", DataTable)
-        table.add_columns("Name", "URL", "Key")
+        table.add_columns(_("Name"), _("URL"), _("Key"))
         self.editing_favorite_original_name = None # Para rastrear o favorito sendo editado
         self.load_favorites_to_table()
 
@@ -207,27 +215,27 @@ class FavoritesScreen(Screen):
             fav_key_input = self.query_one("#fav_key_input", Input)
             fav_key_input.password = not fav_key_input.password
             button = self.query_one("#toggle_fav_password", Button)
-            button.label = "👁️ Show" if fav_key_input.password else "🙈 Hide"
+            button.label = _("👁️ Show") if fav_key_input.password else _("🙈 Hide")
             return
 
         if not name or not url or not key:
-            self.app.log_message("[ERROR] All fields (Name, URL, Key) are required.")
+            self.app.log_message(_("[ERROR] All fields (Name, URL, Key) are required."))
             return
 
         if event.button.id == "add_favorite":
             if any(fav["name"] == name for fav in self.app.favorites):
-                self.app.log_message(f"[ERROR] A favorite with the name '{name}' already exists.")
+                self.app.log_message(_(f"[ERROR] A favorite with the name '{name}' already exists."))
                 return
             self.app.favorites.append({"name": name, "url": url, "key": key})
-            self.app.log_message(f"Favorite '{name}' added.")
+            self.app.log_message(_(f"Favorite '{name}' added."))
         elif event.button.id == "edit_favorite":
             if self.editing_favorite_original_name is None:
-                self.app.log_message("[ERROR] No favorite selected for editing.")
+                self.app.log_message(_("[ERROR] No favorite selected for editing."))
                 return
             
             # Checks if the new name already exists and is not the original name of the favorite being edited
             if name != self.editing_favorite_original_name and any(fav["name"] == name for fav in self.app.favorites):
-                self.app.log_message(f"[ERROR] Another favorite with the name '{name}' already exists.")
+                self.app.log_message(_(f"[ERROR] Another favorite with the name '{name}' already exists."))
                 return
 
             found = False
@@ -235,23 +243,23 @@ class FavoritesScreen(Screen):
                 if fav["name"] == self.editing_favorite_original_name: # Uses the original name to find
                     self.app.favorites[i] = {"name": name, "url": url, "key": key}
                     found = True
-                    self.app.log_message(f"Favorite '{self.editing_favorite_original_name}' updated to '{name}'.")
+                    self.app.log_message(_(f"Favorite '{self.editing_favorite_original_name}' updated to '{name}'."))
                     break
             if not found:
-                self.app.log_message(f"[ERROR] Original favorite '{self.editing_favorite_original_name}' not found for editing.")
+                self.app.log_message(_(f"[ERROR] Original favorite '{self.editing_favorite_original_name}' not found for editing."))
                 return
             self.editing_favorite_original_name = None # Clears the editing state after saving
         elif event.button.id == "remove_favorite":
             if self.editing_favorite_original_name is None:
-                self.app.log_message("[ERROR] No favorite selected for removal.")
+                self.app.log_message(_("[ERROR] No favorite selected for removal."))
                 return
             
             initial_len = len(self.app.favorites)
             self.app.favorites = [fav for fav in self.app.favorites if fav["name"] != self.editing_favorite_original_name]
             if len(self.app.favorites) < initial_len:
-                self.app.log_message(f"Favorite '{self.editing_favorite_original_name}' removed.")
+                self.app.log_message(_(f"Favorite '{self.editing_favorite_original_name}' removed."))
             else:
-                self.app.log_message(f"[ERROR] Favorite '{self.editing_favorite_original_name}' not found for removal.")
+                self.app.log_message(_(f"[ERROR] Favorite '{self.editing_favorite_original_name}' not found for removal."))
                 return
             self.editing_favorite_original_name = None # Clears the editing state after removing
         
@@ -263,16 +271,14 @@ class FavoritesScreen(Screen):
 
 
 class LogScreen(Screen):
-    """Screen to display application logs."""
-
-    BINDINGS = [("escape", "app.pop_screen", "Back")]
+    BINDINGS = [("escape", "app.pop_screen", _("Back"))]
 
     def compose(self) -> ComposeResult:
-        yield Header(name="Application Log")
+        yield Header(name=_("Application Log"))
         with Container(id="log-screen-container"):
             yield Log(id="log_viewer_screen")
             with Horizontal(classes="button-container"):
-                yield Button("Back", id="back_from_log", variant="primary")
+                yield Button(_("⬅️ Back"), id="back_from_log", variant="primary")
         yield Footer()
 
     def on_mount(self) -> None:
@@ -291,8 +297,8 @@ class TeleStreamApp(App):
 
     CSS_PATH = "app.css"
     BINDINGS = [
-        ("d", "toggle_dark", "Toggle dark mode"),
-        ("escape", "show_quit_dialog", "Quit"),
+        ("d", "toggle_dark", _("Toggle dark mode")),
+        ("escape", "show_quit_dialog", _("Quit")),
     ]
 
     def action_show_quit_dialog(self) -> None:
@@ -310,30 +316,29 @@ class TeleStreamApp(App):
         """Cria os widgets filhos para o aplicativo."""
         yield Header(name="TeleStream TUI")
         with Container():
-            yield Label("Video Path:")
+            yield Label(_("Video Path:"))
             with Horizontal():
-                yield Input(placeholder="e.g.: /home/user/video.mp4", id="video_path")
-                yield Button("📁 Browse...", id="browse", variant="default")
+                yield Input(placeholder=_("e.g.: /home/user/video.mp4"), id="video_path")
+                yield Button(_("📁 Browse..."), id="browse", variant="default")
             
-            yield Label("Favorite Server:")
+            yield Label(_("Favorite Server:"))
             with Horizontal():
                 yield Select([], id="favorite_server_select")
             
-            yield Label("Server URL (RTMP/RTMPS):")
-            yield Input(placeholder="e.g.: rtmps://dc1-1.rtmp.t.me/s/", id="server_url")
-            
-            yield Label("Telegram Stream Key:")
+            yield Label(_("Server URL (RTMP/RTMPS):"))
+            yield Input(placeholder=_("e.g.: rtmps://dc1-1.rtmp.t.me/s/"), id="server_url")            
+            yield Label(_("Telegram Stream Key:"))
             with Horizontal():
-                yield Input(placeholder="e.g.: 123456:abc-123", id="stream_key", password=True)
-                yield Button("👁️ Show", id="toggle_password", variant="default")
+                yield Input(placeholder=_("e.g.: 123456:abc-123"), id="stream_key", password=True)
+                yield Button(_("👁️ Show"), id="toggle_password", variant="default")
             
             with Horizontal(id="main-action-buttons"):
-                yield Button("▶️ Start Stream", id="start", variant="primary")
-                yield Button("⏹️ Stop Stream", id="stop", variant="error", disabled=True)
+                yield Button(_("▶️ Start Stream"), id="start", variant="primary")
+                yield Button(_("⏹️ Stop Stream"), id="stop", variant="error", disabled=True)
             with Horizontal(id="main-utility-buttons"):
-                yield Button("📜 Show Log", id="show_log", variant="default")
-                yield Button("ℹ️ About/Donate", id="about", variant="default")
-                yield Button("⭐ Manage Favorites", id="manage_favorites", variant="default")
+                yield Button(_("📜 Show Log"), id="show_log", variant="default")
+                yield Button(_("ℹ️ About/Donate"), id="about", variant="default")
+                yield Button(_("⭐ Manage Favorites"), id="manage_favorites", variant="default")
         yield Footer()
 
     def on_mount(self) -> None:
@@ -418,7 +423,7 @@ class TeleStreamApp(App):
             stream_key_input = self.query_one("#stream_key", Input)
             stream_key_input.password = not stream_key_input.password
             button = self.query_one("#toggle_password", Button)
-            button.label = "👁️ Show" if stream_key_input.password else "🙈 Hide"
+            button.label = _("👁️ Show") if stream_key_input.password else _("🙈 Hide")
 
         elif event.button.id == "show_log":
             self.push_screen(LogScreen())
@@ -435,11 +440,11 @@ class TeleStreamApp(App):
             stream_key = self.query_one("#stream_key", Input).value
 
             if not video_path or not server_url or not stream_key:
-                self.log_message("[ERROR] Video path, server URL, and stream key are required.")
+                self.log_message(_("[ERROR] Video path, server URL, and stream key are required."))
                 return
 
             if not os.path.exists(video_path):
-                self.log_message(f"[ERROR] File not found: {video_path}")
+                self.log_message(_(f"[ERROR] File not found: {video_path}"))
                 return
 
             # Saves the last stream key and the name of the favorite used
@@ -458,7 +463,7 @@ class TeleStreamApp(App):
 
     def start_streaming(self, video_path: str, server_url: str, stream_key: str):
         """Starts the streaming process with ffmpeg."""
-        self.log_message("Starting stream...")
+        self.log_message(_("Starting stream..."))
         self.query_one("#start", Button).disabled = True
         self.query_one("#stop", Button).disabled = False
 
@@ -485,7 +490,7 @@ class TeleStreamApp(App):
                 encoding='utf-8',
                 errors='replace'
             )
-            self.log_message(f"Streaming started with PID: {self.streaming_process.pid}")
+            self.log_message(_(f"Streaming started with PID: {self.streaming_process.pid}"))
 
             # Starts the thread to read ffmpeg output
             thread = threading.Thread(
@@ -496,11 +501,11 @@ class TeleStreamApp(App):
             thread.start()
 
         except FileNotFoundError:
-            self.log_message("[ERROR] ffmpeg not found. Check if it's installed and in PATH.")
+            self.log_message(_("[ERROR] ffmpeg not found. Check if it's installed and in PATH."))
             self.query_one("#start", Button).disabled = False
             self.query_one("#stop", Button).disabled = True
         except Exception as e:
-            self.log_message(f"[ERROR] Failed to start ffmpeg: {e}")
+            self.log_message(_(f"[ERROR] Failed to start ffmpeg: {e}"))
             self.query_one("#start", Button).disabled = False
             self.query_one("#stop", Button).disabled = True
 
@@ -514,18 +519,18 @@ class TeleStreamApp(App):
     def stop_streaming(self):
         """Stops the streaming process."""
         if self.streaming_process and self.streaming_process.poll() is None:
-            self.log_message("Stopping stream...")
+            self.log_message(_("Stopping stream..."))
             self.streaming_process.terminate()
             try:
                 self.streaming_process.wait(timeout=5)
-                self.log_message("Stream stopped successfully.")
+                self.log_message(_("Stream stopped successfully."))
             except subprocess.TimeoutExpired:
-                self.log_message("ffmpeg did not respond, forcing termination.")
+                self.log_message(_("ffmpeg did not respond, forcing termination."))
                 self.streaming_process.kill()
-                self.log_message("Stream forced to stop.")
+                self.log_message(_("Stream forced to stop."))
             self.streaming_process = None
         else:
-            self.log_message("No active stream to stop.")
+            self.log_message(_("No active stream to stop."))
 
 
 if __name__ == "__main__":

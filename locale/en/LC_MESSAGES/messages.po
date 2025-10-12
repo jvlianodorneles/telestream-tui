@@ -1,0 +1,210 @@
+# English translations for telestream-tui.
+# Copyright (C) 2023 THE telestream-tui's COPYRIGHT HOLDER
+# This file is distributed under the same license as the telestream-tui project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: telestream-tui 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-12 12:00-0300\n"
+"PO-Revision-Date: 2023-10-12 12:00-0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: English <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.0\n"
+"Language: en\n"
+
+msgid "Are you sure you want to quit?"
+msgstr "Are you sure you want to quit?"
+
+msgid "✅ Yes"
+msgstr "✅ Yes"
+
+msgid "❌ No"
+msgstr "❌ No"
+
+msgid "File Browser"
+msgstr "File Browser"
+
+msgid "⬅️ Back"
+msgstr "⬅️ Back"
+
+msgid "About/Donate"
+msgstr "About/Donate"
+
+msgid "PIX:"
+msgstr "PIX:"
+
+msgid "\nEnjoying the app? Consider sending a collectible gift on Telegram: https://t.me/jvlianodorneles"
+msgstr "\nEnjoying the app? Consider sending a collectible gift on Telegram: https://t.me/jvlianodorneles"
+
+msgid "Back"
+msgstr "Back"
+
+msgid "Application Log"
+msgstr "Application Log"
+
+msgid "Toggle dark mode"
+msgstr "Toggle dark mode"
+
+msgid "Quit"
+msgstr "Quit"
+
+msgid "Video Path:"
+msgstr "Video Path:"
+
+msgid "e.g.: /home/user/video.mp4"
+msgstr "e.g.: /home/user/video.mp4"
+
+msgid "📁 Browse..."
+msgstr "📁 Browse..."
+
+msgid "Favorite Server:"
+msgstr "Favorite Server:"
+
+msgid "Server URL (RTMP/RTMPS):"
+msgstr "Server URL (RTMP/RTMPS):"
+
+msgid "e.g.: rtmps://dc1-1.rtmp.t.me/s/"
+msgstr "e.g.: rtmps://dc1-1.rtmp.t.me/s/"
+
+msgid "Telegram Stream Key:"
+msgstr "Telegram Stream Key:"
+
+msgid "e.g.: 123456:abc-123"
+msgstr "e.g.: 123456:abc-123"
+
+msgid "👁️ Show"
+msgstr "👁️ Show"
+
+msgid "▶️ Start Stream"
+msgstr "▶️ Start Stream"
+
+msgid "⏹️ Stop Stream"
+msgstr "⏹️ Stop Stream"
+
+msgid "📜 Show Log"
+msgstr "📜 Show Log"
+
+msgid "ℹ️ About/Donate"
+msgstr "ℹ️ About/Donate"
+
+msgid "⭐ Manage Favorites"
+msgstr "⭐ Manage Favorites"
+
+msgid "🙈 Hide"
+msgstr "🙈 Hide"
+
+msgid "[ERROR] Video path, server URL, and stream key are required."
+msgstr "[ERROR] Video path, server URL, and stream key are required."
+
+msgid "[ERROR] File not found: {video_path}"
+msgstr "[ERROR] File not found: {video_path}"
+
+msgid "Starting stream..."
+msgstr "Starting stream..."
+
+msgid "Streaming started with PID: {self.streaming_process.pid}"
+msgstr "Streaming started with PID: {self.streaming_process.pid}"
+
+msgid "[ERROR] ffmpeg not found. Check if it's installed and in PATH."
+msgstr "[ERROR] ffmpeg not found. Check if it's installed and in PATH."
+
+msgid "[ERROR] Failed to start ffmpeg: {e}"
+msgstr "[ERROR] Failed to start ffmpeg: {e}"
+
+msgid "Stopping stream..."
+msgstr "Stopping stream..."
+
+msgid "Stream stopped successfully."
+msgstr "Stream stopped successfully."
+
+msgid "ffmpeg did not respond, forcing termination."
+msgstr "ffmpeg did not respond, forcing termination."
+
+msgid "Stream forced to stop."
+msgstr "Stream forced to stop."
+
+msgid "No active stream to stop."
+msgstr "No active stream to stop."
+
+msgid "Manage Favorites"
+msgstr "Manage Favorites"
+
+msgid "Favorite Servers"
+msgstr "Favorite Servers"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "URL"
+msgstr "URL"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Name:"
+msgstr "Name:"
+
+msgid "Server Name"
+msgstr "Server Name"
+
+msgid "Server URL:"
+msgstr "Server URL:"
+
+msgid "Stream Key:"
+msgstr "Stream Key:"
+
+msgid "secret_key"
+msgstr "secret_key"
+
+msgid "➕ Add"
+msgstr "➕ Add"
+
+msgid "💾 Save Edit"
+msgstr "💾 Save Edit"
+
+msgid "🗑️ Remove"
+msgstr "🗑️ Remove"
+
+msgid "🧹 Clear Fields"
+msgstr "🧹 Clear Fields"
+
+msgid "Favorite selected in table: {selected_name}"
+msgstr "Favorite selected in table: {selected_name}"
+
+msgid "Fields populated for {selected_name}"
+msgstr "Fields populated for {selected_name}"
+
+msgid "[ERROR] All fields (Name, URL, Key) are required."
+msgstr "[ERROR] All fields (Name, URL, Key) are required."
+
+msgid "[ERROR] A favorite with the name '{name}' already exists."
+msgstr "[ERROR] A favorite with the name '{name}' already exists."
+
+msgid "Favorite '{name}' added."
+msgstr "Favorite '{name}' added."
+
+msgid "[ERROR] No favorite selected for editing."
+msgstr "[ERROR] No favorite selected for editing."
+
+msgid "[ERROR] Another favorite with the name '{name}' already exists."
+msgstr "[ERROR] Another favorite with the name '{name}' already exists."
+
+msgid "Favorite '{self.editing_favorite_original_name}' updated to '{name}'."
+msgstr "Favorite '{self.editing_favorite_original_name}' updated to '{name}'."
+
+msgid "[ERROR] Original favorite '{self.editing_favorite_original_name}' not found for editing."
+msgstr "[ERROR] Original favorite '{self.editing_favorite_original_name}' not found for editing."
+
+msgid "[ERROR] No favorite selected for removal."
+msgstr "[ERROR] No favorite selected for removal."
+
+msgid "Favorite '{self.editing_favorite_original_name}' removed."
+msgstr "Favorite '{self.editing_favorite_original_name}' removed."
+
+msgid "[ERROR] Favorite '{self.editing_favorite_original_name}' not found for removal."
+msgstr "[ERROR] Favorite '{self.editing_favorite_original_name}' not found for removal."
