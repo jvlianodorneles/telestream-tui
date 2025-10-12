@@ -49,8 +49,8 @@ class QuitScreen(ModalScreen):
         with Vertical(id="quit-dialog"):
             yield Label("Are you sure you want to quit?", id="quit-question")
             with Horizontal(id="quit-buttons"):
-                yield Button("Yes", variant="error", id="quit-yes")
-                yield Button("No", variant="primary", id="quit-no")
+                yield Button("✅ Yes", variant="error", id="quit-yes")
+                yield Button("❌ No", variant="primary", id="quit-no")
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "quit-yes":
@@ -60,19 +60,27 @@ class QuitScreen(ModalScreen):
 
 
 class FileBrowserScreen(Screen):
-    """Tela para navegar e selecionar um arquivo de vídeo."""
+    """Screen to browse and select a video file."""
+
+    BINDINGS = [("escape", "dismiss", "Back")]
 
     def compose(self) -> ComposeResult:
         yield Header(name="File Browser")
-        # Começa no diretório raiz do sistema
+        # Starts at the system root directory
         yield DirectoryTree(path="/", id="tree_view")
+        with Horizontal(classes="button-container"):
+            yield Button("⬅️ Back", id="back_from_file_browser", variant="default")
         yield Footer()
 
     def on_directory_tree_file_selected(
         self, event: DirectoryTree.FileSelected
     ) -> None:
-        """Chamado quando um arquivo é selecionado."""
+        """Called when a file is selected."""
         self.dismiss(str(event.path))
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "back_from_file_browser":
+            self.dismiss()
 
 
 class AboutScreen(Screen):
@@ -88,7 +96,7 @@ class AboutScreen(Screen):
                 yield Static(self.get_pix_qr_code(), id="qr-code")
             yield Static("\nEnjoying the app? Consider sending a collectible gift on Telegram: https://t.me/jvlianodorneles", id="telegram-gift-label")
             with Horizontal(classes="button-container"):
-                yield Button("Back", id="back", variant="primary")
+                yield Button("⬅️ Back", id="back", variant="primary")
         yield Footer()
 
     def get_pix_qr_code(self) -> str:
@@ -132,12 +140,13 @@ class FavoritesScreen(Screen):
                 yield Label("Stream Key:")
                 with Horizontal():
                     yield Input(placeholder="secret_key", id="fav_key_input", password=True)
-                    yield Button("Show", id="toggle_fav_password", variant="default")
+                    yield Button("👁️ Show", id="toggle_fav_password", variant="default")
                 with Horizontal(id="fav-buttons"):
-                    yield Button("Add", id="add_favorite", variant="primary")
-                    yield Button("Save Edit", id="edit_favorite", variant="default", disabled=True)
-                    yield Button("Remove", id="remove_favorite", variant="error", disabled=True)
-                    yield Button("Clear Fields", id="clear_fields", variant="default")
+                    yield Button("➕ Add", id="add_favorite", variant="primary")
+                    yield Button("💾 Save Edit", id="edit_favorite", variant="default", disabled=True)
+                    yield Button("🗑️ Remove", id="remove_favorite", variant="error", disabled=True)
+                    yield Button("🧹 Clear Fields", id="clear_fields", variant="default")
+                    yield Button("⬅️ Back", id="back_from_favorites", variant="default")
         yield Footer()
 
     def on_mount(self) -> None:
@@ -190,11 +199,15 @@ class FavoritesScreen(Screen):
             self.editing_favorite_original_name = None # Clears the editing state
             return
 
+        elif event.button.id == "back_from_favorites":
+            self.app.pop_screen()
+            return
+
         elif event.button.id == "toggle_fav_password":
             fav_key_input = self.query_one("#fav_key_input", Input)
             fav_key_input.password = not fav_key_input.password
             button = self.query_one("#toggle_fav_password", Button)
-            button.label = "Show" if fav_key_input.password else "Hide"
+            button.label = "👁️ Show" if fav_key_input.password else "🙈 Hide"
             return
 
         if not name or not url or not key:
@@ -249,6 +262,30 @@ class FavoritesScreen(Screen):
         self.clear_form_fields()
 
 
+class LogScreen(Screen):
+    """Screen to display application logs."""
+
+    BINDINGS = [("escape", "app.pop_screen", "Back")]
+
+    def compose(self) -> ComposeResult:
+        yield Header(name="Application Log")
+        with Container(id="log-screen-container"):
+            yield Log(id="log_viewer_screen")
+            with Horizontal(classes="button-container"):
+                yield Button("Back", id="back_from_log", variant="primary")
+        yield Footer()
+
+    def on_mount(self) -> None:
+        # Populate log viewer with history
+        log_viewer = self.query_one("#log_viewer_screen", Log)
+        for message in self.app.log_history:
+            log_viewer.write_line(message)
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "back_from_log":
+            self.app.pop_screen()
+
+
 class TeleStreamApp(App):
     """Um aplicativo TUI para transmitir vídeos para o Telegram."""
 
@@ -276,12 +313,11 @@ class TeleStreamApp(App):
             yield Label("Video Path:")
             with Horizontal():
                 yield Input(placeholder="e.g.: /home/user/video.mp4", id="video_path")
-                yield Button("Browse...", id="browse", variant="default")
+                yield Button("📁 Browse...", id="browse", variant="default")
             
             yield Label("Favorite Server:")
             with Horizontal():
                 yield Select([], id="favorite_server_select")
-                yield Button("Manage Favorites", id="manage_favorites", variant="default")
             
             yield Label("Server URL (RTMP/RTMPS):")
             yield Input(placeholder="e.g.: rtmps://dc1-1.rtmp.t.me/s/", id="server_url")
@@ -289,15 +325,15 @@ class TeleStreamApp(App):
             yield Label("Telegram Stream Key:")
             with Horizontal():
                 yield Input(placeholder="e.g.: 123456:abc-123", id="stream_key", password=True)
-                yield Button("Show", id="toggle_password", variant="default")
+                yield Button("👁️ Show", id="toggle_password", variant="default")
             
-            with Horizontal():
-                yield Button("Start Stream", id="start", variant="primary")
-                yield Button("Stop Stream", id="stop", variant="error", disabled=True)
-            with Horizontal():
-                yield Button("Hide Log", id="toggle_log", variant="default")
-                yield Button("About/Donate", id="about", variant="default")
-            yield Log(id="log_viewer")
+            with Horizontal(id="main-action-buttons"):
+                yield Button("▶️ Start Stream", id="start", variant="primary")
+                yield Button("⏹️ Stop Stream", id="stop", variant="error", disabled=True)
+            with Horizontal(id="main-utility-buttons"):
+                yield Button("📜 Show Log", id="show_log", variant="default")
+                yield Button("ℹ️ About/Donate", id="about", variant="default")
+                yield Button("⭐ Manage Favorites", id="manage_favorites", variant="default")
         yield Footer()
 
     def on_mount(self) -> None:
@@ -307,6 +343,8 @@ class TeleStreamApp(App):
         self.streaming_process = None
         self.populate_favorites_dropdown()
         self.load_last_stream_key()
+        self.log_history = [] # Initialize log history
+
 
     def populate_favorites_dropdown(self) -> None:
         """Popula o dropdown de servidores favoritos."""
@@ -355,15 +393,19 @@ class TeleStreamApp(App):
                 self.query_one("#stream_key", Input).value = self.config.get("last_stream_key", "")
 
     def log_message(self, message: str) -> None:
-        """Displays a message in the log viewer."""
-        log_viewer = self.query_one("#log_viewer", Log)
-        log_viewer.write_line(message.strip())
+        """Displays a message in the log viewer and stores it in history."""
+        self.log_history.append(message.strip())
+        # If LogScreen is active, update its log viewer
+        if isinstance(self.screen, LogScreen):
+            log_viewer = self.screen.query_one("#log_viewer_screen", Log)
+            log_viewer.write_line(message.strip())
 
     def show_file_browser(self) -> None:
         """Shows the file browser screen."""
         def on_file_select(path: str) -> None:
             """Callback for when a file is selected."""
-            self.query_one("#video_path", Input).value = path
+            if path is not None:
+                self.query_one("#video_path", Input).value = path
 
         self.push_screen(FileBrowserScreen(), on_file_select)
 
@@ -376,13 +418,10 @@ class TeleStreamApp(App):
             stream_key_input = self.query_one("#stream_key", Input)
             stream_key_input.password = not stream_key_input.password
             button = self.query_one("#toggle_password", Button)
-            button.label = "Show" if stream_key_input.password else "Hide"
+            button.label = "👁️ Show" if stream_key_input.password else "🙈 Hide"
 
-        elif event.button.id == "toggle_log":
-            log_viewer = self.query_one("#log_viewer")
-            log_viewer.toggle_class("hidden")
-            button = self.query_one("#toggle_log", Button)
-            button.label = "Show Log" if log_viewer.has_class("hidden") else "Hide Log"
+        elif event.button.id == "show_log":
+            self.push_screen(LogScreen())
 
         elif event.button.id == "about":
             self.push_screen(AboutScreen())
