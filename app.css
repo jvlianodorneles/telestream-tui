@@ -1,0 +1,187 @@
+/* app.css */
+
+Container {
+    align: center middle;
+    padding: 1 2;
+}
+
+/* Agrupa o Input e o botão de procurar */
+Horizontal {
+    align: left middle;
+    height: auto;
+    width: 100%;
+    margin-bottom: 1;
+}
+
+#video_path {
+    width: 80%;
+}
+
+#browse {
+    width: 20%;
+    margin-left: 1;
+}
+
+#server_url {
+    width: 100%;
+}
+
+#stream_key {
+    width: 80%;
+}
+
+#toggle_password {
+    width: 20%;
+    margin-left: 1;
+}
+
+#start, #stop {
+    width: 50%;
+}
+
+#toggle_log, #about, #manage_favorites {
+    width: 50%;
+}
+
+#log_viewer {
+    margin-top: 1;
+    padding: 1;
+    border: round white;
+    height: 10;
+    width: 100%;
+}
+
+#log_viewer.hidden {
+    display: none;
+}
+
+/* Estilo para a tela Sobre/Doar */
+.about-container {
+    align: center middle;
+    width: 100%;
+}
+
+#dev-label, #pix-label, #telegram-gift-label {
+    width: 100%;
+    text-align: center;
+}
+
+.qr-code-container {
+    width: 100%;
+    align: center middle;
+}
+
+#qr-code {
+    width: auto;
+    height: auto;
+}
+
+.button-container {
+    width: 100%;
+    align: center middle;
+    margin-top: 1;
+}
+
+#back {
+    width: 30;
+}
+
+/* Estilo para a tela do navegador de arquivos */
+
+/* Estilo para o diálogo de confirmação de saída */
+QuitScreen {
+    align: center middle;
+}
+
+#quit-dialog {
+    width: 40;
+    height: auto;
+    padding: 1 2;
+    background: $surface;
+    border: heavy $primary;
+}
+
+#quit-question {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1;
+}
+
+#quit-buttons {
+    width: 100%;
+    align: center middle;
+}
+
+#quit-buttons > Button {
+    width: 50%;
+}
+FileBrowserScreen {
+    align: center middle;
+}
+
+DirectoryTree {
+    width: 100%;
+    height: 100%;
+    border: round white;
+}
+
+/* Estilos para FavoritesScreen */
+FavoritesScreen {
+    align: center middle;
+}
+
+#favorites-container {
+    width: 70%; /* Mais compacto */
+    height: auto; /* Altura ajustável ao conteúdo */
+    padding: 1;
+}
+
+.screen-title {
+    text-align: center;
+    margin-bottom: 1;
+    text-style: bold;
+}
+
+#favorites_table {
+    height: 10; /* Altura fixa para a tabela */
+    width: 100%;
+    margin-bottom: 1;
+    border: round $primary;
+}
+
+#favorite-form {
+    width: 100%;
+    height: auto;
+    padding: 1 0;
+    border: round $secondary;
+}
+
+#favorite-form Label {
+    margin-top: 0;
+}
+
+#fav_name_input, #fav_url_input {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+#fav_key_input {
+    width: 80%; /* Ajuste para o botão */
+}
+
+#toggle_fav_password {
+    width: 20%;
+    margin-left: 1;
+}
+
+#fav-buttons {
+    width: 100%;
+    margin-top: 1;
+    align: center middle;
+}
+
+#fav-buttons Button {
+    width: 22%; /* Botões um pouco menores */
+    margin-left: 1;
+    margin-right: 1;
+}
