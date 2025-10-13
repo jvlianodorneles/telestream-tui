@@ -1,6 +1,6 @@
 # TeleStream TUI
 
-This is a simple Terminal User Interface (TUI) application, built in Python with the [Textual](https://textual.textualize.io/) library, to stream a local video file to a Telegram channel using `ffmpeg`.
+This is a simple Terminal User Interface (TUI) application, built in Python with the [Textual](https://textual.textualize.io/) library, to stream local video files or YouTube streams to a Telegram channel using `ffmpeg`.
 
 ## Features
 
