@@ -1,0 +1,261 @@
+# Italian translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-10-13 18:00-0300\n"
+"PO-Revision-Date: 2025-10-13 17:58-0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: it\n"
+"Language-Team: it <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: app.py:62
+msgid "Are you sure you want to quit?"
+msgstr "Sei sicuro di voler uscire?"
+
+#: app.py:64
+msgid "✅ Yes"
+msgstr "✅ Sì"
+
+#: app.py:65
+msgid "❌ No"
+msgstr "❌ No"
+
+#: app.py:80
+msgid "File Browser"
+msgstr "Browser File"
+
+#: app.py:84 app.py:111 app.py:161 app.py:285
+msgid "⬅️ Back"
+msgstr "⬅️ Indietro"
+
+#: app.py:101 app.py:278
+msgid "Back"
+msgstr "Indietro"
+
+#: app.py:104
+msgid "About/Donate"
+msgstr "Informazioni/Donazioni"
+
+#: app.py:106
+msgid "PIX:"
+msgstr "PIX:"
+
+#: app.py:109
+msgid ""
+"\n"
+"Enjoying the app? Consider sending a collectible gift on Telegram: "
+"https://t.me/jvlianodorneles"
+msgstr ""
+"\n"
+"Ti piace l'app? Considera di inviare un regalo da collezione su Telegram: "
+"https://t.me/jvlianodorneles"
+
+#: app.py:143
+msgid "Manage Favorites"
+msgstr "Gestisci Preferiti"
+
+#: app.py:145
+msgid "Favorite Servers"
+msgstr "Server Preferiti"
+
+#: app.py:148
+msgid "Name:"
+msgstr "Nome:"
+
+#: app.py:149
+msgid "Server Name"
+msgstr "Nome Server"
+
+#: app.py:150
+msgid "Server URL:"
+msgstr "URL Server:"
+
+#: app.py:151
+msgid "rtmps://..."
+msgstr "rtmps://..."
+
+#: app.py:152
+msgid "Stream Key:"
+msgstr "Chiave Stream:"
+
+#: app.py:154
+msgid "secret_key"
+msgstr "chiave_segreta"
+
+#: app.py:155 app.py:222 app.py:340 app.py:464
+msgid "👁️ Show"
+msgstr "👁️ Mostra"
+
+#: app.py:157
+msgid "➕ Add"
+msgstr "➕ Aggiungi"
+
+#: app.py:158
+msgid "💾 Save Edit"
+msgstr "💾 Salva Modifica"
+
+#: app.py:159
+msgid "🗑️ Remove"
+msgstr "🗑️ Rimuovi"
+
+#: app.py:160
+msgid "🧹 Clear Fields"
+msgstr "🧹 Pulisci Campi"
+
+#: app.py:166
+msgid "Name"
+msgstr "Nome"
+
+#: app.py:166
+msgid "URL"
+msgstr "URL"
+
+#: app.py:166
+msgid "Key"
+msgstr "Chiave"
+
+#: app.py:222 app.py:464
+msgid "🙈 Hide"
+msgstr "🙈 Nascondi"
+
+#: app.py:226
+msgid "[ERROR] All fields (Name, URL, Key) are required."
+msgstr "[ERRORE] Tutti i campi (Nome, URL, Chiave) sono obbligatori."
+
+#: app.py:237
+msgid "[ERROR] No favorite selected for editing."
+msgstr "[ERRORE] Nessun preferito selezionato per la modifica."
+
+#: app.py:258
+msgid "[ERROR] No favorite selected for removal."
+msgstr "[ERRORE] Nessun preferito selezionato per la rimozione."
+
+#: app.py:281
+msgid "Application Log"
+msgstr "Log Applicazione"
+
+#: app.py:304
+msgid "Toggle dark mode"
+msgstr "Attiva/disattiva modalità scura"
+
+#: app.py:305
+msgid "Quit"
+msgstr "Esci"
+
+#: app.py:323
+msgid "Video Path:"
+msgstr "Percorso Video:"
+
+#: app.py:325
+msgid "e.g.: /home/user/video.mp4"
+msgstr "es.: /home/utente/video.mp4"
+
+#: app.py:326
+msgid "📁 Browse..."
+msgstr "📁 Sfoglia..."
+
+#: app.py:328
+msgid "Or YouTube URL:"
+msgstr "Oppure URL YouTube:"
+
+#: app.py:329
+msgid "e.g.: https://www.youtube.com/watch?v=..."
+msgstr "es.: https://www.youtube.com/watch?v=..."
+
+#: app.py:331
+msgid "Favorite Server:"
+msgstr "Server Preferito:"
+
+#: app.py:335
+msgid "Server URL (RTMP/RTMPS):"
+msgstr "URL Server (RTMP/RTMPS):"
+
+#: app.py:336
+msgid "e.g.: rtmps://dc1-1.rtmp.t.me/s/"
+msgstr "es.: rtmps://dc1-1.rtmp.t.me/s/"
+
+#: app.py:337
+msgid "Telegram Stream Key:"
+msgstr "Chiave Stream Telegram:"
+
+#: app.py:339
+msgid "e.g.: 123456:abc-123"
+msgstr "es.: 123456:abc-123"
+
+#: app.py:343
+msgid "▶️ Start Stream"
+msgstr "▶️ Avvia Stream"
+
+#: app.py:344
+msgid "⏹️ Stop Stream"
+msgstr "⏹️ Ferma Stream"
+
+#: app.py:346
+msgid "📜 Show Log"
+msgstr "📜 Mostra Log"
+
+#: app.py:347
+msgid "ℹ️ About/Donate"
+msgstr "ℹ️ Informazioni/Donazioni"
+
+#: app.py:348
+msgid "⭐ Manage Favorites"
+msgstr "⭐ Gestisci Preferiti"
+
+#: app.py:482
+msgid ""
+"[ERROR] Server URL and stream key are required, plus a video path or "
+"YouTube URL."
+msgstr ""
+"[ERRORE] URL del server e chiave di streaming sono obbligatori, più un "
+"percorso video o un URL di YouTube."
+
+#: app.py:506
+msgid "Starting stream..."
+msgstr "Avvio dello stream..."
+
+#: app.py:515
+msgid "Fetching YouTube stream URL..."
+msgstr "Recupero dell'URL dello stream di YouTube..."
+
+#: app.py:523
+msgid "Successfully fetched stream URL."
+msgstr "URL dello stream recuperato con successo."
+
+#: app.py:571
+msgid "[ERROR] ffmpeg not found. Check if it's installed and in PATH."
+msgstr "[ERRORE] ffmpeg non trovato. Controlla se è installato e nel PATH."
+
+#: app.py:589
+msgid "Stopping stream..."
+msgstr "Arresto dello stream..."
+
+#: app.py:593
+msgid "Stream stopped successfully."
+msgstr "Stream interrotto con successo."
+
+#: app.py:595
+msgid "ffmpeg did not respond, forcing termination."
+msgstr "ffmpeg non ha risposto, terminazione forzata."
+
+#: app.py:597
+msgid "Stream forced to stop."
+msgstr "Stream interrotto forzatamente."
+
+#: app.py:602
+msgid "Stream stopped."
+msgstr "Stream interrotto."
+
+#: app.py:604
+msgid "No active stream to stop."
+msgstr "Nessuno stream attivo da interrompere."
