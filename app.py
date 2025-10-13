@@ -6,12 +6,8 @@ import subprocess
 import threading
 from pathlib import Path
 import gettext
-
-import qrcode
-from textual.app import App, ComposeResult
-from textual.containers import Container, Horizontal, Vertical
-from textual.screen import Screen, ModalScreen
-from textual.widgets import Button, Header, Footer, Input, Label, Static, DirectoryTree, Log, Select, DataTable
+import logging
+import yt_dlp
 
 # Setup gettext for internationalization
 LOCALE_DIR = Path(__file__).parent / "locale"
@@ -19,6 +15,12 @@ gettext.bindtextdomain("messages", LOCALE_DIR)
 gettext.textdomain("messages")
 gettext.install("messages", LOCALE_DIR)
 from gettext import gettext as _
+
+import qrcode
+from textual.app import App, ComposeResult
+from textual.containers import Container, Horizontal, Vertical
+from textual.screen import Screen, ModalScreen
+from textual.widgets import Button, Header, Footer, Input, Label, Static, DirectoryTree, Log, Select, DataTable
 
 CONFIG_FILE = Path("config.json")
 
@@ -48,8 +50,10 @@ def save_config(config: dict) -> None:
         json.dump(config, f, indent=4)
 
 
+
+
 class QuitScreen(ModalScreen):
-    """Tela de confirmação de saída."""
+    """Screen to confirm if the user wants to quit."""
 
     BINDINGS = [("escape", "app.pop_screen", "Cancel")]
 
@@ -320,6 +324,9 @@ class TeleStreamApp(App):
             with Horizontal():
                 yield Input(placeholder=_("e.g.: /home/user/video.mp4"), id="video_path")
                 yield Button(_("📁 Browse..."), id="browse", variant="default")
+
+            yield Label(_("Or YouTube URL:"))
+            yield Input(placeholder=_("e.g.: https://www.youtube.com/watch?v=..."), id="youtube_url")
             
             yield Label(_("Favorite Server:"))
             with Horizontal():
@@ -343,12 +350,24 @@ class TeleStreamApp(App):
 
     def on_mount(self) -> None:
         """Chamado quando o aplicativo é montado."""
+        self.setup_logging()
         self.config = load_config()
         self.favorites = self.config.get("favorites", [])
         self.streaming_process = None
         self.populate_favorites_dropdown()
         self.load_last_stream_key()
         self.log_history = [] # Initialize log history
+
+    def setup_logging(self):
+        """Configures logging to a file."""
+        log_file = "telestream.log"
+        logging.basicConfig(
+            level=logging.INFO,
+            format="%(asctime)s - %(levelname)s - %(message)s",
+            handlers=[
+                logging.FileHandler(log_file)
+            ]
+        )
 
 
     def populate_favorites_dropdown(self) -> None:
@@ -381,6 +400,23 @@ class TeleStreamApp(App):
         if not self.query_one("#stream_key", Input).value:
             self.query_one("#stream_key", Input).value = self.config.get("last_stream_key", "")
 
+    def on_input_changed(self, event: Input.Changed) -> None:
+        """Called when the value of an input changes."""
+        if event.input.id == "video_path":
+            if event.value:
+                self.query_one("#youtube_url", Input).value = ""
+                self.query_one("#youtube_url", Input).disabled = True
+            else:
+                self.query_one("#youtube_url", Input).disabled = False
+        elif event.input.id == "youtube_url":
+            if event.value:
+                self.query_one("#video_path", Input).value = ""
+                self.query_one("#video_path", Input).disabled = True
+                self.query_one("#browse", Button).disabled = True
+            else:
+                self.query_one("#video_path", Input).disabled = False
+                self.query_one("#browse", Button).disabled = False
+
     def on_select_changed(self, event: Select.Changed) -> None:
         """Called when a favorite is selected from the dropdown."""
         if event.control.id == "favorite_server_select":
@@ -398,12 +434,14 @@ class TeleStreamApp(App):
                 self.query_one("#stream_key", Input).value = self.config.get("last_stream_key", "")
 
     def log_message(self, message: str) -> None:
-        """Displays a message in the log viewer and stores it in history."""
-        self.log_history.append(message.strip())
+        """Displays a message in the log viewer, stores it in history, and logs to a file."""
+        message = message.strip()
+        self.log_history.append(message)
+        logging.info(message)
         # If LogScreen is active, update its log viewer
         if isinstance(self.screen, LogScreen):
             log_viewer = self.screen.query_one("#log_viewer_screen", Log)
-            log_viewer.write_line(message.strip())
+            log_viewer.write_line(message)
 
     def show_file_browser(self) -> None:
         """Shows the file browser screen."""
@@ -436,14 +474,15 @@ class TeleStreamApp(App):
 
         elif event.button.id == "start":
             video_path = self.query_one("#video_path", Input).value
+            youtube_url = self.query_one("#youtube_url", Input).value
             server_url = self.query_one("#server_url", Input).value
             stream_key = self.query_one("#stream_key", Input).value
 
-            if not video_path or not server_url or not stream_key:
-                self.log_message(_("[ERROR] Video path, server URL, and stream key are required."))
+            if not (video_path or youtube_url) or not server_url or not stream_key:
+                self.log_message(_("[ERROR] Server URL and stream key are required, plus a video path or YouTube URL."))
                 return
 
-            if not os.path.exists(video_path):
+            if video_path and not os.path.exists(video_path):
                 self.log_message(_(f"[ERROR] File not found: {video_path}"))
                 return
 
@@ -456,30 +495,58 @@ class TeleStreamApp(App):
                 self.config.pop("last_favorite_name", None) # Removes last favorite if none selected
             save_config(self.config)
 
-            self.start_streaming(video_path, server_url, stream_key)
+            stream_source = video_path if video_path else youtube_url
+            self.start_streaming(stream_source, server_url, stream_key)
 
         elif event.button.id == "stop":
             self.stop_streaming()
 
-    def start_streaming(self, video_path: str, server_url: str, stream_key: str):
+    def start_streaming(self, stream_source: str, server_url: str, stream_key: str):
         """Starts the streaming process with ffmpeg."""
         self.log_message(_("Starting stream..."))
         self.query_one("#start", Button).disabled = True
         self.query_one("#stop", Button).disabled = False
 
+        input_source = stream_source
+
+        # If it's a YouTube URL, get the direct stream URL
+        if stream_source.startswith("http"): 
+            try:
+                self.log_message(_("Fetching YouTube stream URL..."))
+                ydl_opts = {
+                    'format': 'best[ext=mp4]/best',
+                    'quiet': True
+                }
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    info = ydl.extract_info(stream_source, download=False)
+                    input_source = info['url']
+                self.log_message(_("Successfully fetched stream URL."))
+            except Exception as e:
+                self.log_message(_(f"[ERROR] Failed to get YouTube stream URL: {e}"))
+                self.query_one("#start", Button).disabled = False
+                self.query_one("#stop", Button).disabled = True
+                return
+
         # The full URL is the server URL + stream key
         full_rtmp_url = f"{server_url}/{stream_key}"
+        
         command = [
             "ffmpeg",
-            "-stream_loop", "-1",
-            "-i", video_path,
+        ]
+
+        # Add loop for local files, not for URLs
+        if not stream_source.startswith("http"):
+            command.extend(["-stream_loop", "-1"])
+
+        command.extend([
+            "-i", input_source,
             "-vcodec", "libx264",
             "-b:v", "10M",
             "-acodec", "aac",
             "-b:a", "128k",
             "-f", "flv",
             full_rtmp_url,
-        ]
+        ])
 
         try:
             self.streaming_process = subprocess.Popen(
@@ -528,7 +595,11 @@ class TeleStreamApp(App):
                 self.log_message(_("ffmpeg did not respond, forcing termination."))
                 self.streaming_process.kill()
                 self.log_message(_("Stream forced to stop."))
-            self.streaming_process = None
+            finally:
+                self.streaming_process = None
+                self.query_one("#start", Button).disabled = False
+                self.query_one("#stop", Button).disabled = True
+                self.log_message(_("Stream stopped."))
         else:
             self.log_message(_("No active stream to stop."))
 

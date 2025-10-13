@@ -22,6 +22,7 @@ dist/
 
 # User-specific configuration and sensitive data
 config.json
+yt.py
 
 # Logs
 *.log

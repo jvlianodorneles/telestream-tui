@@ -151,7 +151,7 @@ FavoritesScreen {
 }
 
 #favorites-container {
-    width: 70%; /* Mais compacto */
+    width: 100%; /* Adjusted to use all available horizontal space */
     height: auto; /* Altura ajustável ao conteúdo */
     padding: 1;
 }

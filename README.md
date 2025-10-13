@@ -5,6 +5,7 @@ This is a simple Terminal User Interface (TUI) application, built in Python with
 ## Features
 
 -   Simple text-based user interface for easy use.
+-   Stream a local video file or a YouTube video.
 -   Saves the last used stream key for convenience.
 -   Displays basic status and error logs.
 -   Buttons to start and stop streaming.
@@ -36,7 +37,9 @@ This is a simple Terminal User Interface (TUI) application, built in Python with
     ```bash
     python app.py
     ```
-2.  **Video Path**: Enter the absolute path to the video file you want to stream (e.g., `/home/user/my_video.mp4`).
+2.  **Video Source**: You have two options for the video source, which are mutually exclusive:
+    *   **Video Path**: Enter the absolute path to the local video file you want to stream (e.g., `/home/user/my_video.mp4`).
+    *   **Or YouTube URL**: Paste the URL of the YouTube video you want to stream (e.g., `https://www.youtube.com/watch?v=...`).
 3.  **Favorite Servers Management**:
     *   Click the "Manage Favorites" button to open the management screen.
     *   On this screen, you can add new favorite servers by providing a Name, the Server URL (e.g., `rtmps://dc1-1.rtmp.t.me/s/`), and the Stream Key.

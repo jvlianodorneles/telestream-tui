@@ -1,210 +1,313 @@
 # Spanish translations for telestream-tui.
 # Copyright (C) 2023 THE telestream-tui's COPYRIGHT HOLDER
-# This file is distributed under the same license as the telestream-tui project.
+# This file is distributed under the same license as the telestream-tui
+# project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: telestream-tui 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-12 12:00-0300\n"
+"POT-Creation-Date: 2025-10-13 15:01-0300\n"
 "PO-Revision-Date: 2023-10-12 12:00-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
 "Language-Team: Spanish <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.13.0\n"
-"Language: es\n"
+"Generated-By: Babel 2.17.0\n"
 
+#: app.py:62
 msgid "Are you sure you want to quit?"
 msgstr "¿Estás seguro de que quieres salir?"
 
+#: app.py:64
 msgid "✅ Yes"
 msgstr "✅ Sí"
 
+#: app.py:65
 msgid "❌ No"
 msgstr "❌ No"
 
+#: app.py:80
 msgid "File Browser"
 msgstr "Explorador de Archivos"
 
+#: app.py:84 app.py:111 app.py:161 app.py:285
 msgid "⬅️ Back"
 msgstr "⬅️ Atrás"
 
-msgid "About/Donate"
-msgstr "Acerca de/Donar"
-
-msgid "PIX:"
-msgstr "PIX:"
-
-msgid "\nEnjoying the app? Consider sending a collectible gift on Telegram: https://t.me/jvlianodorneles"
-msgstr "\n¿Disfrutas de la aplicación? Considera enviar un regalo coleccionable en Telegram: https://t.me/jvlianodorneles"
-
+#: app.py:101 app.py:278
 msgid "Back"
 msgstr "Atrás"
 
-msgid "Application Log"
-msgstr "Registro de la Aplicación"
+#: app.py:104
+msgid "About/Donate"
+msgstr "Acerca de/Donar"
 
-msgid "Toggle dark mode"
-msgstr "Alternar modo oscuro"
+#: app.py:106
+msgid "PIX:"
+msgstr "PIX:"
 
-msgid "Quit"
-msgstr "Salir"
+#: app.py:109
+msgid ""
+"\n"
+"Enjoying the app? Consider sending a collectible gift on Telegram: "
+"https://t.me/jvlianodorneles"
+msgstr ""
+"\n"
+"¿Disfrutas de la aplicación? Considera enviar un regalo coleccionable en "
+"Telegram: https://t.me/jvlianodorneles"
 
-msgid "Video Path:"
-msgstr "Ruta del Video:"
-
-msgid "e.g.: /home/user/video.mp4"
-msgstr "ej.: /home/user/video.mp4"
-
-msgid "📁 Browse..."
-msgstr "📁 Examinar..."
-
-msgid "Favorite Server:"
-msgstr "Servidor Favorito:"
-
-msgid "Server URL (RTMP/RTMPS):"
-msgstr "URL del Servidor (RTMP/RTMPS):"
-
-msgid "e.g.: rtmps://dc1-1.rtmp.t.me/s/"
-msgstr "ej.: rtmps://dc1-1.rtmp.t.me/s/"
-
-msgid "Telegram Stream Key:"
-msgstr "Clave de Transmisión de Telegram:"
-
-msgid "e.g.: 123456:abc-123"
-msgstr "ej.: 123456:abc-123"
-
-msgid "👁️ Show"
-msgstr "👁️ Mostrar"
-
-msgid "▶️ Start Stream"
-msgstr "▶️ Iniciar Transmisión"
-
-msgid "⏹️ Stop Stream"
-msgstr "⏹️ Detener Transmisión"
-
-msgid "📜 Show Log"
-msgstr "📜 Mostrar Registro"
-
-msgid "ℹ️ About/Donate"
-msgstr "ℹ️ Acerca de/Donar"
-
-msgid "⭐ Manage Favorites"
-msgstr "⭐ Administrar Favoritos"
-
-msgid "🙈 Hide"
-msgstr "🙈 Ocultar"
-
-msgid "[ERROR] Video path, server URL, and stream key are required."
-msgstr "[ERROR] Se requiere la ruta del video, la URL del servidor y la clave de transmisión."
-
-msgid "[ERROR] File not found: {video_path}"
-msgstr "[ERROR] Archivo no encontrado: {video_path}"
-
-msgid "Starting stream..."
-msgstr "Iniciando transmisión..."
-
-msgid "Streaming started with PID: {self.streaming_process.pid}"
-msgstr "Transmisión iniciada con PID: {self.streaming_process.pid}"
-
-msgid "[ERROR] ffmpeg not found. Check if it's installed and in PATH."
-msgstr "[ERROR] ffmpeg no encontrado. Verifique si está instalado y en PATH."
-
-msgid "[ERROR] Failed to start ffmpeg: {e}"
-msgstr "[ERROR] Fallo al iniciar ffmpeg: {e}"
-
-msgid "Stopping stream..."
-msgstr "Deteniendo transmisión..."
-
-msgid "Stream stopped successfully."
-msgstr "Transmisión detenida con éxito."
-
-msgid "ffmpeg did not respond, forcing termination."
-msgstr "ffmpeg no respondió, forzando la terminación."
-
-msgid "Stream forced to stop."
-msgstr "Transmisión forzada a detenerse."
-
-msgid "No active stream to stop."
-msgstr "No hay transmisión activa para detener."
-
+#: app.py:143
 msgid "Manage Favorites"
 msgstr "Administrar Favoritos"
 
+#: app.py:145
 msgid "Favorite Servers"
 msgstr "Servidores Favoritos"
 
-msgid "Name"
-msgstr "Nombre"
-
-msgid "URL"
-msgstr "URL"
-
-msgid "Key"
-msgstr "Clave"
-
+#: app.py:148
 msgid "Name:"
 msgstr "Nombre:"
 
+#: app.py:149
 msgid "Server Name"
 msgstr "Nombre del Servidor"
 
+#: app.py:150
 msgid "Server URL:"
 msgstr "URL del Servidor:"
 
+#: app.py:151
+msgid "rtmps://..."
+msgstr "rtmps://..."
+
+#: app.py:152
 msgid "Stream Key:"
 msgstr "Clave de Transmisión:"
 
+#: app.py:154
 msgid "secret_key"
 msgstr "clave_secreta"
 
+#: app.py:155 app.py:222 app.py:340 app.py:464
+msgid "👁️ Show"
+msgstr "👁️ Mostrar"
+
+#: app.py:157
 msgid "➕ Add"
 msgstr "➕ Añadir"
 
+#: app.py:158
 msgid "💾 Save Edit"
 msgstr "💾 Guardar Edición"
 
+#: app.py:159
 msgid "🗑️ Remove"
 msgstr "🗑️ Eliminar"
 
+#: app.py:160
 msgid "🧹 Clear Fields"
 msgstr "🧹 Limpiar Campos"
 
-msgid "Favorite selected in table: {selected_name}"
-msgstr "Favorito seleccionado en la tabla: {selected_name}"
+#: app.py:166
+msgid "Name"
+msgstr "Nombre"
 
-msgid "Fields populated for {selected_name}"
-msgstr "Campos rellenados para {selected_name}"
+#: app.py:166
+msgid "URL"
+msgstr "URL"
 
+#: app.py:166
+msgid "Key"
+msgstr "Clave"
+
+#: app.py:222 app.py:464
+msgid "🙈 Hide"
+msgstr "🙈 Ocultar"
+
+#: app.py:226
 msgid "[ERROR] All fields (Name, URL, Key) are required."
 msgstr "[ERROR] Todos los campos (Nombre, URL, Clave) son obligatorios."
 
-msgid "[ERROR] A favorite with the name '{name}' already exists."
-msgstr "[ERROR] Ya existe un favorito con el nombre '{name}'."
-
-msgid "Favorite '{name}' added."
-msgstr "Favorito '{name}' añadido."
-
+#: app.py:237
 msgid "[ERROR] No favorite selected for editing."
 msgstr "[ERROR] No hay favorito seleccionado para editar."
 
-msgid "[ERROR] Another favorite with the name '{name}' already exists."
-msgstr "[ERROR] Ya existe otro favorito con el nombre '{name}'."
-
-msgid "Favorite '{self.editing_favorite_original_name}' updated to '{name}'."
-msgstr "Favorito '{self.editing_favorite_original_name}' actualizado a '{name}'."
-
-msgid "[ERROR] Original favorite '{self.editing_favorite_original_name}' not found for editing."
-msgstr "[ERROR] Favorito original '{self.editing_favorite_original_name}' no encontrado para editar."
-
+#: app.py:258
 msgid "[ERROR] No favorite selected for removal."
 msgstr "[ERROR] No hay favorito seleccionado para eliminar."
 
-msgid "Favorite '{self.editing_favorite_original_name}' removed."
-msgstr "Favorito '{self.editing_favorite_original_name}' eliminado."
+#: app.py:281
+msgid "Application Log"
+msgstr "Registro de la Aplicación"
 
-msgid "[ERROR] Favorite '{self.editing_favorite_original_name}' not found for removal."
-msgstr "[ERROR] Favorito '{self.editing_favorite_original_name}' no encontrado para eliminar."
+#: app.py:304
+msgid "Toggle dark mode"
+msgstr "Alternar modo oscuro"
+
+#: app.py:305
+msgid "Quit"
+msgstr "Salir"
+
+#: app.py:323
+msgid "Video Path:"
+msgstr "Ruta del Video:"
+
+#: app.py:325
+msgid "e.g.: /home/user/video.mp4"
+msgstr "ej.: /home/user/video.mp4"
+
+#: app.py:326
+msgid "📁 Browse..."
+msgstr "📁 Examinar..."
+
+#: app.py:328
+msgid "Or YouTube URL:"
+msgstr "O URL de YouTube:"
+
+#: app.py:329
+msgid "e.g.: https://www.youtube.com/watch?v=..."
+msgstr "ej.: https://www.youtube.com/watch?v=..."
+
+#: app.py:331
+msgid "Favorite Server:"
+msgstr "Servidor Favorito:"
+
+#: app.py:335
+msgid "Server URL (RTMP/RTMPS):"
+msgstr "URL del Servidor (RTMP/RTMPS):"
+
+#: app.py:336
+msgid "e.g.: rtmps://dc1-1.rtmp.t.me/s/"
+msgstr "ej.: rtmps://dc1-1.rtmp.t.me/s/"
+
+#: app.py:337
+msgid "Telegram Stream Key:"
+msgstr "Clave de Transmisión de Telegram:"
+
+#: app.py:339
+msgid "e.g.: 123456:abc-123"
+msgstr "ej.: 123456:abc-123"
+
+#: app.py:343
+msgid "▶️ Start Stream"
+msgstr "▶️ Iniciar Transmisión"
+
+#: app.py:344
+msgid "⏹️ Stop Stream"
+msgstr "⏹️ Detener Transmisión"
+
+#: app.py:346
+msgid "📜 Show Log"
+msgstr "📜 Mostrar Registro"
+
+#: app.py:347
+msgid "ℹ️ About/Donate"
+msgstr "ℹ️ Acerca de/Donar"
+
+#: app.py:348
+msgid "⭐ Manage Favorites"
+msgstr "⭐ Administrar Favoritos"
+
+#: app.py:482
+#, fuzzy
+msgid ""
+"[ERROR] Server URL and stream key are required, plus a video path or "
+"YouTube URL."
+msgstr ""
+"[ERROR] Se requiere la ruta del video, la URL del servidor y la clave de "
+"transmisión."
+
+#: app.py:506
+msgid "Starting stream..."
+msgstr "Iniciando transmisión..."
+
+#: app.py:515
+msgid "Fetching YouTube stream URL..."
+msgstr "Obteniendo URL del stream de YouTube..."
+
+#: app.py:523
+msgid "Successfully fetched stream URL."
+msgstr "URL del stream obtenida con éxito."
+
+#: app.py:571
+msgid "[ERROR] ffmpeg not found. Check if it's installed and in PATH."
+msgstr "[ERROR] ffmpeg no encontrado. Verifique si está instalado y en PATH."
+
+#: app.py:589
+msgid "Stopping stream..."
+msgstr "Deteniendo transmisión..."
+
+#: app.py:593
+msgid "Stream stopped successfully."
+msgstr "Transmisión detenida con éxito."
+
+#: app.py:595
+msgid "ffmpeg did not respond, forcing termination."
+msgstr "ffmpeg no respondió, forzando la terminación."
+
+#: app.py:597
+msgid "Stream forced to stop."
+msgstr "Transmisión forzada a detenerse."
+
+#: app.py:602
+#, fuzzy
+msgid "Stream stopped."
+msgstr "Transmisión detenida con éxito."
+
+#: app.py:604
+msgid "No active stream to stop."
+msgstr "No hay transmisión activa para detener."
+
+#~ msgid "[ERROR] File not found: {video_path}"
+#~ msgstr "[ERROR] Archivo no encontrado: {video_path}"
+
+#~ msgid "Streaming started with PID: {self.streaming_process.pid}"
+#~ msgstr "Transmisión iniciada con PID: {self.streaming_process.pid}"
+
+#~ msgid "[ERROR] Failed to start ffmpeg: {e}"
+#~ msgstr "[ERROR] Fallo al iniciar ffmpeg: {e}"
+
+#~ msgid "Favorite selected in table: {selected_name}"
+#~ msgstr "Favorito seleccionado en la tabla: {selected_name}"
+
+#~ msgid "Fields populated for {selected_name}"
+#~ msgstr "Campos rellenados para {selected_name}"
+
+#~ msgid "[ERROR] A favorite with the name '{name}' already exists."
+#~ msgstr "[ERROR] Ya existe un favorito con el nombre '{name}'."
+
+#~ msgid "Favorite '{name}' added."
+#~ msgstr "Favorito '{name}' añadido."
+
+#~ msgid "[ERROR] Another favorite with the name '{name}' already exists."
+#~ msgstr "[ERROR] Ya existe otro favorito con el nombre '{name}'."
+
+#~ msgid "Favorite '{self.editing_favorite_original_name}' updated to '{name}'."
+#~ msgstr ""
+#~ "Favorito '{self.editing_favorite_original_name}' "
+#~ "actualizado a '{name}'."
+
+#~ msgid ""
+#~ "[ERROR] Original favorite "
+#~ "'{self.editing_favorite_original_name}' not found "
+#~ "for editing."
+#~ msgstr ""
+#~ "[ERROR] Favorito original "
+#~ "'{self.editing_favorite_original_name}' no encontrado "
+#~ "para editar."
+
+#~ msgid "Favorite '{self.editing_favorite_original_name}' removed."
+#~ msgstr "Favorito '{self.editing_favorite_original_name}' eliminado."
+
+#~ msgid ""
+#~ "[ERROR] Favorite '{self.editing_favorite_original_name}'"
+#~ " not found for removal."
+#~ msgstr ""
+#~ "[ERROR] Favorito '{self.editing_favorite_original_name}'"
+#~ " no encontrado para eliminar."
+
