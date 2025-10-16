@@ -534,8 +534,8 @@ class TeleStreamApp(App):
             "ffmpeg",
         ]
 
-        # Add loop for local files, not for URLs
-        if not stream_source.startswith("http"):
+        # Add loop for local files and YouTube videos
+        if not stream_source.startswith("http") or "youtube.com" in stream_source or "youtu.be" in stream_source:
             command.extend(["-stream_loop", "-1"])
 
         command.extend([
